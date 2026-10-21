@@ -1,373 +1,416 @@
-<!-- Search & Filter Section -->
-<section class="bg-white shadow rounded-xl p-5">
+<!DOCTYPE html>
+<html lang="en">
 
-    <h2 class="text-2xl font-bold mb-4">
-        Search / Filter
-    </h2>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <div class="grid md:grid-cols-2 gap-6">
+    <title>E-Commerce Order Processor</title>
 
-        <!-- Search Orders -->
-        <div>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
 
-            <label class="block font-semibold mb-2">
-                Search Order ID or Customer Name
-            </label>
+<body class="bg-slate-100 min-h-screen">
 
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="ORD-0001 or Joy"
-                class="w-full border rounded-lg p-2">
+    <!-- ===================================================== -->
+    <!-- HEADER -->
+    <!-- ===================================================== -->
 
-            <button
-                id="searchBtn"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-2 hover:bg-blue-700">
+    <header class="bg-slate-900 text-white shadow-lg">
 
-                Search Order
+        <div class="max-w-7xl mx-auto px-6 py-6">
 
-            </button>
+            <h1 class="text-4xl font-bold">
+                E-Commerce Order Processor
+            </h1>
 
-        </div>
-
-        <!-- Category Filter -->
-        <!-- Search / Filter Section -->
-<section class="bg-white shadow rounded-xl p-5">
-
-    <h2 class="text-2xl font-bold mb-4">
-        Search / Filter
-    </h2>
-
-    <div class="grid md:grid-cols-2 gap-6">
-
-        <!-- Search -->
-        <div>
-
-            <label
-                class="block font-semibold mb-2">
-                Search Order ID or Customer
-            </label>
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="ORD-0001 or Joy"
-                class="w-full border rounded-lg p-2">
-
-            <button
-                id="searchBtn"
-                class="bg-blue-600 text-white px-4 py-2 rounded-lg mt-2">
-
-                Search Order
-
-            </button>
+            <p class="text-slate-300 mt-2">
+                JavaScript Built-In Objects Dashboard
+            </p>
 
         </div>
 
-        <!-- Dynamic Category Dropdown -->
-        <div>
+    </header>
 
-            <label
-                class="block font-semibold mb-2">
-                Category Filter
-            </label>
+    <!-- ===================================================== -->
+    <!-- NAVIGATION -->
+    <!-- ===================================================== -->
 
-            <select
-                id="categoryFilter"
-                class="w-full border rounded-lg p-2">
+    <nav class="bg-white shadow">
 
-                <option value="all">
-                    All Categories
-                </option>
+        <div class="max-w-7xl mx-auto p-4 flex flex-wrap gap-3">
 
-            </select>
+            <a href="#ordersSection"
+                class="bg-blue-600 text-white px-4 py-2 rounded">
+                Orders
+            </a>
 
-        </div>
+            <a href="#searchSection"
+                class="bg-green-600 text-white px-4 py-2 rounded">
+                Search & Filter
+            </a>
 
-    </div>
+            <a href="#statisticsSection"
+                class="bg-purple-600 text-white px-4 py-2 rounded">
+                Statistics
+            </a>
 
-    <div class="mt-6">
+            <a href="#categoriesSection"
+                class="bg-indigo-600 text-white px-4 py-2 rounded">
+                Categories
+            </a>
 
-        <label
-            class="block font-semibold mb-2">
-            Minimum Price
-        </label>
+            <a href="#lookupSection"
+                class="bg-pink-600 text-white px-4 py-2 rounded">
+                Product Lookup
+            </a>
 
-        <div class="flex gap-2">
-
-            <input
-                type="number"
-                id="minPrice"
-                value="0"
-                class="border rounded-lg p-2">
-
-            <button
-                id="priceFilterBtn"
-                class="bg-green-600 text-white px-4 py-2 rounded-lg">
-
-                Filter Price
-
-            </button>
+            <a href="#processingSection"
+                class="bg-orange-600 text-white px-4 py-2 rounded">
+                Data Processing
+            </a>
 
         </div>
 
-    </div>
+    </nav>
 
-    <!-- Challenge 4 Results -->
-    <div
-        id="analysisResults"
-        class="mt-6 bg-slate-100 rounded-xl p-4">
+    <!-- ===================================================== -->
+    <!-- MAIN CONTENT -->
+    <!-- ===================================================== -->
 
-    </div>
+    <main class="max-w-7xl mx-auto p-6">
 
-</section>
-    <!-- Price Filter -->
-    <div class="mt-6">
+        <!-- ================================================= -->
+        <!-- PAGE INTRO -->
+        <!-- ================================================= -->
 
-        <label class="block font-semibold mb-2">
-            Minimum Price
-        </label>
+        <section class="mb-8">
 
-        <div class="flex gap-2">
+            <h2 class="text-3xl font-bold text-slate-800">
+                Dashboard Overview
+            </h2>
 
-            <input
-                type="number"
-                id="minPrice"
-                value="0"
-                class="border rounded-lg p-2 w-40">
+            <p class="text-slate-500 mt-2">
+                Manage orders, analyse data, search products,
+                validate information and process JSON data.
+            </p>
 
-            <button
-                id="priceFilterBtn"
-                class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700">
+        </section>
 
-                Filter Price
+        <!-- ================================================= -->
+        <!-- ORDERS -->
+        <!-- ================================================= -->
 
-            </button>
+        <section id="ordersSection"
+            class="bg-white shadow rounded-xl p-5 mb-6">
 
-        </div>
+            <h2 class="text-2xl font-bold mb-4">
+                Orders
+            </h2>
 
-    </div>
+            <div id="ordersContainer"
+                class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            </div>
 
-    <!-- Results Display -->
-    <div
+        </section>
 
-    <! -- Product Lookup Section -->
-<section class="bg-white shadow rounded-xl p-5">
+        <!-- ================================================= -->
+        <!-- SEARCH & FILTER -->
+        <!-- ================================================= -->
 
-    <h2 class="text-2xl font-bold mb-4">
-        Product Lookup
-    </h2>
+        <section id="searchSection"
+            class="bg-white shadow rounded-xl p-5 mb-6">
 
-    <div class="grid md:grid-cols-2 gap-4">
+            <h2 class="text-2xl font-bold mb-4">
+                Search & Filter
+            </h2>
 
-        <div>
+            <div class="grid md:grid-cols-2 gap-6">
 
-            <label class="block font-semibold mb-2">
-                Enter Product Name
-            </label>
+                <!-- Search Order -->
+                <div>
 
-            <input
-                type="text"
-                id="productInput"
-                placeholder="Laptop"
-                class="w-full border rounded-lg p-2">
+                    <label class="block font-semibold mb-2">
+                        Search Order ID or Customer
+                    </label>
 
-            <button
-                id="lookupBtn"
-                class="bg-purple-600 text-white px-4 py-2 rounded-lg mt-2">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="ORD-0001 or Joy"
+                        class="w-full border rounded-lg p-2">
 
-                Find Product
+                    <button
+                        id="searchBtn"
+                        class="bg-blue-600 text-white px-4 py-2 rounded mt-2">
 
-            </button>
+                        Search Order
 
-        </div>
+                    </button>
 
-        <div>
+                </div>
 
-            <h3 class="font-semibold mb-2">
-                Product Information
-            </h3>
+                <!-- Category Filter -->
+                <div>
 
-            <div
-                id="productResult"
-                class="bg-slate-100 p-4 rounded-lg">
+                    <label class="block font-semibold mb-2">
+                        Filter By Category
+                    </label>
 
-                Search for a product.
+                    <select
+                        id="categoryFilter"
+                        class="w-full border rounded-lg p-2">
+
+                        <option value="all">
+                            All Categories
+                        </option>
+
+                    </select>
+
+                </div>
 
             </div>
 
-        </div>
+            <!-- Price Filter -->
 
-    </div>
+            <div class="mt-6">
 
-    <div
-        id="mapStats"
-        class="mt-4">
-    </div>
+                <label class="block font-semibold mb-2">
+                    Minimum Price
+                </label>
 
-</section>
-      
-    
+                <div class="flex gap-2">
 
-<!-- Data Processing Section -->
-<!-- RegExp Validation Tool -->
-<div class="mt-8 border-t pt-6">
+                    <input
+                        type="number"
+                        id="minPrice"
+                        value="0"
+                        class="border rounded-lg p-2">
 
-    <h3 class="text-xl font-bold mb-4">
-        Validation Tool
-    </h3>
+                    <button
+                        id="priceFilterBtn"
+                        class="bg-green-600 text-white px-4 py-2 rounded">
 
-    <label class="block font-semibold mb-2">
-        Test Email or Order ID
-    </label>
+                        Filter Price
 
-    <input
-        type="text"
-        id="validationInput"
-        placeholder="Enter email or order ID"
-        class="w-full border rounded-lg p-3">
+                    </button>
 
-    <button
-        id="validateBtn"
-        class="mt-3 bg-purple-600 text-white px-4 py-2 rounded-lg">
+                </div>
 
-        Validate
+            </div>
 
-    </button>
+            <!-- Array Method Results -->
 
-    <div
-        id="validationResult"
-        class="mt-4">
-    </div>
+            <div
+                id="analysisResults"
+                class="mt-6 bg-slate-100 rounded-xl p-4">
+            </div>
 
-</div>
-    <!-- Export Output -->
-    <div class="mb-4">
+        </section>
 
-        <label
-            class="block font-semibold mb-2">
+        <!-- ================================================= -->
+        <!-- STATISTICS -->
+        <!-- ================================================= -->
 
-            JSON Export
+        <section id="statisticsSection"
+            class="bg-white shadow rounded-xl p-5 mb-6">
 
-        </label>
+            <h2 class="text-2xl font-bold mb-4">
+                Statistics Dashboard
+            </h2>
 
-        <textarea
-            id="jsonOutput"
-            rows="10"
-            readonly
-            class="w-full border rounded p-3">
-        </textarea>
+            <div
+                id="statisticsContainer"
+                class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            </div>
 
-    </div>
+        </section>
 
-    <!-- Import -->
-    <div class="mb-4">
+        <!-- ================================================= -->
+        <!-- CATEGORIES -->
+        <!-- ================================================= -->
 
-        <label
-            class="block font-semibold mb-2">
+        <section id="categoriesSection"
+            class="bg-white shadow rounded-xl p-5 mb-6">
 
-            Import JSON
+            <h2 class="text-2xl font-bold mb-4">
+                Categories
+            </h2>
 
-        </label>
+            <p class="text-slate-500 mb-4">
+                Generated dynamically from a JavaScript Set.
+            </p>
 
-        <textarea
-            id="jsonInput"
-            rows="10"
-            placeholder="Paste order JSON here..."
-            class="w-full border rounded p-3">
-        </textarea>
+            <div
+                id="categoryStats"
+                class="mb-4">
+            </div>
 
-    </div>
+            <div
+                id="categoriesContainer"
+                class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+            </div>
 
-    <button
-        id="importJsonBtn"
-        class="bg-green-600 text-white px-4 py-2 rounded">
+        </section>
 
-        Import Orders
+        <!-- ================================================= -->
+        <!-- PRODUCT LOOKUP -->
+        <!-- ================================================= -->
 
-    </button>
+        <section id="lookupSection"
+            class="bg-white shadow rounded-xl p-5 mb-6">
 
-    <!-- Status Message -->
+            <h2 class="text-2xl font-bold mb-4">
+                Product Lookup
+            </h2>
 
-    <div
-        id="jsonStatus"
-        class="mt-4">
-    </div>
+            <div class="grid md:grid-cols-2 gap-6">
 
-</section>
+                <div>
 
-    <!-- Export JSON -->
-    <div class="mb-6">
+                    <label class="block font-semibold mb-2">
+                        Product Name
+                    </label>
 
-        <button
-            id="exportJsonBtn"
-            class="bg-blue-600 text-white px-4 py-2 rounded-lg">
+                    <input
+                        type="text"
+                        id="productInput"
+                        placeholder="Laptop"
+                        class="w-full border rounded-lg p-2">
 
-            Export Orders JSON
+                    <button
+                        id="lookupBtn"
+                        class="bg-purple-600 text-white px-4 py-2 rounded mt-2">
 
-        </button>
+                        Find Product
 
-    </div>
+                    </button>
 
-    <!-- Export Output -->
-    <div class="mb-6">
+                </div>
 
-        <label class="block font-semibold mb-2">
-            Exported JSON
-        </label>
+                <div>
 
-        <textarea
-            id="jsonOutput"
-            rows="10"
-            class="w-full border rounded-lg p-3"
-            readonly>
-        </textarea>
+                    <h3 class="font-semibold mb-2">
+                        Product Result
+                    -- ================================================= -->
 
-    </div>
+        <section id="processingSection"
+            class="bg-white shadow rounded-xl p-5">
 
-    <!-- Import Input -->
-    <div class="mb-4">
+            <h2 class="text-2xl font-bold mb-4">
+                Data Processing
+            </h2>
 
-        <label class="block font-semibold mb-2">
-            Import Orders JSON
-        </label>
+            <!-- Export JSON -->
 
-        <textarea
-            id="jsonInput"
-            rows="10"
-            placeholder="Paste JSON here..."
-            class="w-full border rounded-lg p-3">
-        </textarea>
+            <button
+                id="exportJsonBtn"
+                class="bg-blue-600 text-white px-4 py-2 rounded">
 
-    </div>
+                Export & Download JSON
 
-    <button
-        id="importJsonBtn"
-        class="bg-green-600 text-white px-4 py-2 rounded-lg">
+            </button>
 
-        Import Orders
+            <!-- Export Output -->
 
-    </button>
+            <div class="mt-4">
 
-    <!-- Status -->
-    <div
-        id="jsonStatus"
-        class="mt-4">
-    </div>
+                <label class="block font-semibold mb-2">
+                    Exported JSON
+                </label>
 
-</section>
+                <textarea
+                    id="jsonOutput"
+                    rows="8"
+                    readonly
+                    class="w-full border rounded p-3">
+                </textarea>
 
+            </div>
 
-<!-- Statistics Section -->
-<section class="bg-white shadow rounded-xl p-5">
+            <!-- Import JSON -->
 
-    <h2 class="text-2xl font-bold mb-4">
-        Statistics Dashboard
-    </h2>
+            <div class="mt-4">
 
-    <div
-        id="statisticsContainer"
-        class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-    </div>
+                <label class="block font-semibold mb-2">
+                    Import JSON
+                </label>
 
-</section>
+                <textarea
+                    id="jsonInput"
+                    rows="8"
+                    placeholder="Paste JSON here..."
+                    class="w-full border rounded p-3">
+                </textarea>
+
+            </div>
+
+            <button
+                id="importJsonBtn"
+                class="bg-green-600 text-white px-4 py-2 rounded mt-3">
+
+                Import Orders
+
+            </button>
+
+            <div
+                id="jsonStatus"
+                class="mt-4">
+            </div>
+
+            <!-- RegExp Validation Tool -->
+
+            <div class="mt-8 border-t pt-6">
+
+                <h3 class="text-xl font-bold mb-4">
+                    Validation Tool
+                </h3>
+
+                <input
+                    type="text"
+                    id="validationInput"
+                    placeholder="Enter Email or Order ID"
+                    class="w-full border rounded-lg p-3">
+
+                <button
+                    id="validateBtn"
+                    class="bg-purple-600 text-white px-4 py-2 rounded mt-3">
+
+                    Validate
+
+                </button>
+
+                <div
+                    id="validationResult"
+                    class="mt-4">
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- ===================================================== -->
+    <!-- FOOTER -->
+    <!-- ===================================================== -->
+
+    <footer class="bg-slate-900 text-white text-center p-6 mt-10">
+
+        <p>
+            E-Commerce Order Processor
+        </p>
+
+        <p class="text-slate-400">
+            Built with HTML, Tailwind CSS and JavaScript
+        </p>
+
+    </footer>
+
+    <!-- Main JavaScript File -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
