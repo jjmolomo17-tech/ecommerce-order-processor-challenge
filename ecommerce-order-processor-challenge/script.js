@@ -789,9 +789,6 @@ function renderStatistics() {
     `;
 }
 
-
-
-
 /*
 =================================================
 Application Startup
@@ -811,6 +808,8 @@ renderCategories();
 initializeChallenge6();
 
 setupJSONEvents();
+
+setupValidationTool();
 
 
 /*
@@ -1969,6 +1968,266 @@ function validateInputValue() {
 
     `;
 
+}
+
+
+
+/*
+=================================================
+CHALLENGE 9 - STATISTICS DASHBOARD
+=================================================
+*/
+
+function renderStatistics() {
+
+    const statisticsContainer =
+        document.getElementById(
+            "statisticsContainer"
+        );
+
+    if (!statisticsContainer) {
+        return;
+    }
+
+    /*
+    Total Orders
+    */
+    const totalOrders =
+        orders.length;
+
+    /*
+    Total Value
+    */
+    const totalValue =
+        orders.reduce(
+            (total, order) =>
+                total + order.price,
+            0
+        );
+
+    /*
+    Average Value
+    */
+    const averageValue =
+        totalValue / totalOrders;
+
+    /*
+    Highest Order
+    */
+    const highestOrder =
+        Math.max(
+            ...orders.map(
+                order => order.price
+            )
+        );
+
+    /*
+    Lowest Order
+    */
+    const lowestOrder =
+        Math.min(
+            ...orders.map(
+                order => order.price
+            )
+        );
+
+    /*
+    Most Expensive Product
+    */
+    const mostExpensiveOrder =
+        orders.reduce(
+            (highest, current) =>
+                current.price >
+                highest.price
+                    ? current
+                    : highest
+        );
+
+    /*
+    Recent Orders
+    */
+    const recentOrders =
+        orders.filter(order =>
+            isRecentOrder(
+                order.orderDate
+            )
+        ).length;
+
+    /*
+    Valid Emails
+    */
+    const validEmails =
+        orders.filter(order =>
+            isValidEmail(
+                cleanEmail(
+                    order.email
+                )
+            )
+        ).length;
+
+    /*
+    Invalid Emails
+    */
+    const invalidEmails =
+        orders.filter(order =>
+            !isValidEmail(
+                cleanEmail(
+                    order.email
+                )
+            )
+        ).length;
+
+    /*
+    Unique Categories
+    */
+    const uniqueCategories =
+        getUniqueCategories().length;
+
+    /*
+    Orders Per Category
+    */
+    const categoryCounts = {};
+
+    orders.forEach(order => {
+
+        categoryCounts[
+            order.category
+        ] =
+            (categoryCounts[
+                order.category
+            ] || 0) + 1;
+
+    });
+
+    const categoryHtml =
+        Object.entries(
+            categoryCounts
+        )
+        .map(
+            ([category, count]) =>
+                `
+                <p>
+                    ${category}: ${count}
+                </p>
+                `
+        )
+        .join("");
+
+    statisticsContainer.innerHTML = `
+
+        <div class="bg-blue-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Total Orders
+            </h3>
+
+            <p class="text-3xl">
+                ${totalOrders}
+            </p>
+        </div>
+
+        <div class="bg-green-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Total Value
+            </h3>
+
+            <p class="text-2xl">
+                R${totalValue.toFixed(2)}
+            </p>
+        </div>
+
+        <div class="bg-yellow-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Average Order Value
+            </h3>
+
+            <p class="text-2xl">
+                R${averageValue.toFixed(2)}
+            </p>
+        </div>
+
+        <div class="bg-red-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Highest Order
+            </h3>
+
+            <p class="text-2xl">
+                R${highestOrder.toFixed(2)}
+            </p>
+        </div>
+
+        <div class="bg-orange-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Lowest Order
+            </h3>
+
+            <p class="text-2xl">
+                R${lowestOrder.toFixed(2)}
+            </p>
+        </div>
+
+        <div class="bg-purple-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Unique Categories
+            </h3>
+
+            <p class="text-3xl">
+                ${uniqueCategories}
+            </p>
+        </div>
+
+        <div class="bg-indigo-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Valid Emails
+            </h3>
+
+            <p class="text-3xl">
+                ${validEmails}
+            </p>
+        </div>
+
+        <div class="bg-pink-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Invalid Emails
+            </h3>
+
+            <p class="text-3xl">
+                ${invalidEmails}
+            </p>
+        </div>
+
+        <div class="bg-teal-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Recent Orders
+            </h3>
+
+            <p class="text-3xl">
+                ${recentOrders}
+            </p>
+        </div>
+
+        <div class="bg-slate-200 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Most Expensive Product
+            </h3>
+
+            <p>
+                ${mostExpensiveOrder.product}
+            </p>
+
+            <p>
+                R${mostExpensiveOrder.price.toFixed(2)}
+            </p>
+        </div>
+
+        <div class="bg-cyan-100 p-4 rounded-lg lg:col-span-2">
+            <h3 class="font-bold mb-2">
+                Orders Per Category
+            </h3>
+
+            ${categoryHtml}
+        </div>
+
+    `;
 }
 
 
