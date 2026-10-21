@@ -208,27 +208,39 @@
 </section>
       
     
+
 <!-- Data Processing Section -->
-<!-- Data Processing Section -->
-<section class="bg-white shadow rounded-xl p-5">
+<!-- RegExp Validation Tool -->
+<div class="mt-8 border-t pt-6">
 
-    <h2 class="text-2xl font-bold mb-4">
-        Data Processing
-    </h2>
+    <h3 class="text-xl font-bold mb-4">
+        Validation Tool
+    </h3>
 
-    <!-- Export -->
-    <div class="mb-4">
+    <label class="block font-semibold mb-2">
+        Test Email or Order ID
+    </label>
 
-        <button
-            id="exportJsonBtn"
-            class="bg-blue-600 text-white px-4 py-2 rounded">
+    <input
+        type="text"
+        id="validationInput"
+        placeholder="Enter email or order ID"
+        class="w-full border rounded-lg p-3">
 
-            Export & Download JSON
+    <button
+        id="validateBtn"
+        class="mt-3 bg-purple-600 text-white px-4 py-2 rounded-lg">
 
-        </button>
+        Validate
 
+    </button>
+
+    <div
+        id="validationResult"
+        class="mt-4">
     </div>
 
+</div>
     <!-- Export Output -->
     <div class="mb-4">
 
