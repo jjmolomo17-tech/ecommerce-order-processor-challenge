@@ -801,6 +801,12 @@ Application Startup
 =================================================
 */
 
+/*
+=================================================
+Application Startup
+=================================================
+*/
+
 sortOrdersByDate();
 
 renderOrders();
@@ -809,7 +815,9 @@ renderStatistics();
 
 initializeChallenge4();
 
-initializeChallenge5();
+renderCategories();
+
+initializeChallenge6();
 
 
 /*
@@ -1399,5 +1407,239 @@ function initializeChallenge5() {
     populateCategoryDropdown();
 
     renderSetSummary();
+
+}
+
+
+/*
+=================================================
+CHALLENGE 6 - MAP
+Product Lookup
+=================================================
+*/
+
+/*
+Create product map
+Key = Product Name
+Value = Product Information
+*/
+
+const productMap = new Map();
+
+/*
+Populate Map
+Uses set()
+*/
+function buildProductMap() {
+
+    productMap.clear();
+
+    orders.forEach(order => {
+
+        productMap.set(
+
+            order.product,
+
+            {
+                category: order.category,
+                price: order.price,
+                orderId: order.orderId
+            }
+
+        );
+
+    });
+
+}
+
+/*
+Lookup Product
+Uses get() and has()
+*/
+function lookupProduct(productName) {
+
+    if (
+        productMap.has(productName)
+    ) {
+
+        return productMap.get(
+            productName
+        );
+
+    }
+
+    return null;
+
+}
+
+/*
+Display Product Count
+Uses size
+*/
+function renderMapStatistics() {
+
+    const mapStats =
+        document.getElementById(
+            "mapStats"
+        );
+
+    if (!mapStats) {
+        return;
+    }
+
+    mapStats.innerHTML = `
+
+        <div class="bg-purple-100 p-4 rounded-lg inline-block">
+
+            <h3 class="font-bold">
+                Products In Map
+            </h3>
+
+            <p class="text-2xl">
+                ${productMap.size}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+/*
+Display Product Keys
+Uses keys()
+*/
+function getAllProducts() {
+
+    return [
+        ...productMap.keys()
+    ];
+
+}
+
+/*
+Render Product List
+*/
+function renderAvailableProducts() {
+
+    const mapStats =
+        document.getElementById(
+            "mapStats"
+        );
+
+    const productList =
+        getAllProducts();
+
+    mapStats.innerHTML += `
+
+        <div class="mt-4 bg-indigo-100 p-4 rounded-lg">
+
+            <h3 class="font-bold mb-2">
+                Available Products
+            </h3>
+
+            <p>
+                ${productList.join(", ")}
+            </p>
+
+        </div>
+
+    `;
+
+}
+
+/*
+Setup Product Lookup
+*/
+function setupProductLookup() {
+
+    const button =
+        document.getElementById(
+            "lookupBtn"
+        );
+
+    if (!button) {
+        return;
+    }
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const productName =
+                document
+                    .getElementById(
+                        "productInput"
+                    )
+                    .value
+                    .trim();
+
+            const result =
+                lookupProduct(
+                    productName
+                );
+
+            const output =
+                document.getElementById(
+                    "productResult"
+                );
+
+            if (result) {
+
+                output.innerHTML = `
+
+                    <p>
+                        <strong>Product:</strong>
+                        ${productName}
+                    </p>
+
+                    <p>
+                        <strong>Category:</strong>
+                        ${result.category}
+                    </p>
+
+                    <p>
+                        <strong>Price:</strong>
+                        R${result.price.toFixed(2)}
+                    </p>
+
+                    <p>
+                        <strong>Linked Order:</strong>
+                        ${result.orderId}
+                    </p>
+
+                `;
+
+            } else {
+
+                output.innerHTML = `
+
+                    <div class="text-red-600">
+
+                        Product not found.
+
+                    </div>
+
+                `;
+
+            }
+
+        }
+    );
+
+}
+
+/*
+Initialize Challenge 6
+*/
+function initializeChallenge6() {
+
+    buildProductMap();
+
+    renderMapStatistics();
+
+    renderAvailableProducts();
+
+    setupProductLookup();
 
 }
