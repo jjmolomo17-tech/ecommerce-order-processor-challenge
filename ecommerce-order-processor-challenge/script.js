@@ -5,6 +5,9 @@ Challenge 0 - Project Setup and Order Dataset
 =================================================
 */
 
+
+
+
 // Array containing all orders
 const orders = [
     {
@@ -797,3 +800,431 @@ sortOrdersByDate();
 renderOrders();
 
 renderStatistics();
+
+initializeChallenge4();
+/*
+=================================================
+CHALLENGE 4 - ARRAY METHODS
+find()
+filter()
+map()
+some()
+every()
+reduce()
+=================================================
+*/
+
+/*
+Global Results Container
+*/
+let currentOrders = [...orders];
+
+/*
+=================================================
+FIND()
+Search order by Order ID or Customer Name
+=================================================
+*/
+function searchOrder(searchTerm) {
+
+    const cleanedSearch =
+        searchTerm.trim().toLowerCase();
+
+    return orders.find(order => {
+
+        const customerName =
+            cleanCustomerName(
+                order.customerName
+            ).toLowerCase();
+
+        return (
+            order.orderId
+                .toLowerCase()
+                .includes(cleanedSearch)
+            ||
+            customerName.includes(
+                cleanedSearch
+            )
+        );
+
+    });
+}
+
+/*
+=================================================
+FILTER()
+Filter by category
+=================================================
+*/
+function filterByCategory(category) {
+
+    if (
+        category === "all"
+    ) {
+        return orders;
+    }
+
+    return orders.filter(order =>
+        order.category === category
+    );
+}
+
+/*
+=================================================
+FILTER()
+Filter by minimum price
+=================================================
+*/
+function filterByPrice(minPrice) {
+
+    return orders.filter(order =>
+        order.price >= minPrice
+    );
+}
+
+/*
+=================================================
+MAP()
+Create transformed VAT list
+=================================================
+*/
+function getProductsWithVAT() {
+
+    return orders.map(order => {
+
+        return {
+            product: order.product,
+            category: order.category,
+            priceWithVAT:
+                (
+                    order.price * 1.15
+                ).toFixed(2)
+        };
+
+    });
+}
+
+/*
+=================================================
+SOME()
+Check for expensive orders
+=================================================
+*/
+function hasOrdersAbove1000() {
+
+    return orders.some(order =>
+        order.price > 1000
+    );
+}
+
+/*
+=================================================
+EVERY()
+Validate all prices
+=================================================
+*/
+function allPricesValid() {
+
+    return orders.every(order =>
+        order.price > 0
+    );
+}
+
+/*
+=================================================
+REDUCE()
+Calculate total order value
+=================================================
+*/
+function calculateOrderValue() {
+
+    return orders.reduce(
+        (
+            total,
+            order
+        ) =>
+            total +
+            order.price,
+        0
+    );
+}
+
+/*
+=================================================
+Render Array Analysis
+=================================================
+*/
+function renderArrayAnalysis() {
+
+    const analysisContainer =
+        document.getElementById(
+            "analysisResults"
+        );
+
+    if (!analysisContainer) {
+        return;
+    }
+
+    const vatProducts =
+        getProductsWithVAT();
+
+    analysisContainer.innerHTML = `
+
+        <h3 class="text-xl font-bold mb-3">
+            Array Method Analysis
+        </h3>
+
+        <p>
+            <strong>
+            Any order above R1000:
+            </strong>
+            ${hasOrdersAbove1000()}
+        </p>
+
+        <p>
+            <strong>
+            All prices valid:
+            </strong>
+            ${allPricesValid()}
+        </p>
+
+        <p>
+            <strong>
+            Total Order Value:
+            </strong>
+            R${calculateOrderValue().toFixed(2)}
+        </p>
+
+        <div class="mt-4">
+
+            <h4
+                class="font-semibold mb-2">
+                Products With VAT
+            </h4>
+
+            ${vatProducts.map(item => `
+                <div class="border-b py-1">
+
+                    <strong>
+                        ${item.product}
+                    </strong>
+
+                    (${item.category})
+
+                    - R${item.priceWithVAT}
+
+                </div>
+            `).join("")}
+
+        </div>
+
+    `;
+}
+
+/*
+=================================================
+Search Order
+Uses find()
+=================================================
+*/
+function setupSearch() {
+
+    const searchBtn =
+        document.getElementById(
+            "searchBtn"
+        );
+
+    if (!searchBtn) {
+        return;
+    }
+
+    searchBtn.addEventListener(
+        "click",
+        () => {
+
+            const value =
+                document
+                    .getElementById(
+                        "searchInput"
+                    )
+                    .value;
+
+            const result =
+                searchOrder(value);
+
+            if (result) {
+
+                alert(
+`Order Found
+
+Order ID: ${result.orderId}
+Customer: ${cleanCustomerName(result.customerName)}
+Product: ${result.product}
+Category: ${result.category}
+Price: R${result.price}`
+                );
+
+            } else {
+
+                alert(
+                    "No matching order found."
+                );
+
+            }
+
+        }
+    );
+}
+
+/*
+=================================================
+Category Filter
+Uses filter()
+=================================================
+*/
+function setupCategoryFilter() {
+
+    const categoryDropdown =
+        document.getElementById(
+            "categoryFilter"
+        );
+
+    if (!categoryDropdown) {
+        return;
+    }
+
+    categoryDropdown.addEventListener(
+        "change",
+        event => {
+
+            const selectedCategory =
+                event.target.value;
+
+            const filteredOrders =
+                filterByCategory(
+                    selectedCategory
+                );
+
+            alert(
+                `${filteredOrders.length} order(s) found`
+            );
+
+        }
+    );
+}
+
+/*
+=================================================
+Price Filter
+Uses filter()
+=================================================
+*/
+function setupPriceFilter() {
+
+    const button =
+        document.getElementById(
+            "priceFilterBtn"
+        );
+
+    if (!button) {
+        return;
+    }
+
+    button.addEventListener(
+        "click",
+        () => {
+
+            const minPrice =
+                Number(
+                    document
+                        .getElementById(
+                            "minPrice"
+                        )
+                        .value
+                );
+
+            const results =
+                filterByPrice(
+                    minPrice
+                );
+
+            alert(
+                `${results.length} order(s) found`
+            );
+
+        }
+    );
+}
+
+/*
+=================================================
+Initialize Challenge 4
+=================================================
+*/
+function initializeChallenge4() {
+
+    setupSearch();
+
+    setupCategoryFilter();
+
+    setupPriceFilter();
+
+    renderArrayAnalysis();
+}
+
+
+/*
+=================================================
+Render Array Analysis
+=================================================
+*/
+
+function renderArrayAnalysis() {
+
+    const analysisResults =
+        document.getElementById(
+            "analysisResults"
+        );
+
+    const vatProducts =
+        productsWithVAT();
+
+    analysisResults.innerHTML = `
+
+        <h3 class="font-bold text-lg mb-3">
+            Array Method Results
+        </h3>
+
+        <p>
+            <strong>Any order above R1000:</strong>
+            ${hasExpensiveOrders()}
+        </p>
+
+        <p>
+            <strong>All prices valid:</strong>
+            ${allPricesValid()}
+        </p>
+
+        <p>
+            <strong>Total Order Value:</strong>
+            R${calculateOrderTotal().toFixed(2)}
+        </p>
+
+        <div class="mt-3">
+
+            <h4 class="font-semibold">
+                Products With VAT
+            </h4>
+
+            ${vatProducts.map(item => `
+                <p>
+                    ${item.product}
+                    -
+                    R${item.priceWithVAT}
+                </p>
+            `).join("")}
+
+        </div>
+
+    `;
+}
