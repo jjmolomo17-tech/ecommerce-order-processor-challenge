@@ -256,3 +256,91 @@ function removeExtraSpaces(text) {
     return text.replace(/\s+/g, " ");
 }
 
+
+/*
+=================================================
+Render Orders
+=================================================
+*/
+
+function renderOrders() {
+
+    const ordersContainer =
+        document.getElementById("ordersContainer");
+
+    ordersContainer.innerHTML = "";
+
+    orders.forEach(order => {
+
+        const cleanedName =
+            cleanCustomerName(order.customerName);
+
+        const cleanedEmail =
+            cleanEmail(order.email);
+
+        const firstName =
+            getFirstName(order.customerName);
+
+        const emailDomain =
+            getEmailDomain(order.email);
+
+        const card = document.createElement("div");
+
+        card.className =
+            "bg-slate-50 border rounded-xl p-4 shadow";
+
+        card.innerHTML = `
+            <h3 class="font-bold text-lg mb-3">
+                ${order.orderId}
+            </h3>
+
+            <p>
+                <strong>Customer:</strong>
+                ${cleanedName}
+            </p>
+
+            <p>
+                <strong>First Name:</strong>
+                ${firstName}
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                ${cleanedEmail}
+            </p>
+
+            <p>
+                <strong>Email Domain:</strong>
+                ${emailDomain}
+            </p>
+
+            <hr class="my-2">
+
+            <p>
+                <strong>Product:</strong>
+                ${order.product}
+            </p>
+
+            <p>
+                <strong>Category:</strong>
+                ${order.category}
+            </p>
+
+            <p>
+                <strong>Price:</strong>
+                R${order.price}
+            </p>
+
+            <p>
+                <strong>Order Date:</strong>
+                ${order.orderDate}
+            </p>
+        `;
+
+        ordersContainer.appendChild(card);
+    });
+}
+
+
+
+
