@@ -186,3 +186,73 @@ Page Load
 
 renderOrders();
 
+
+/*
+=================================================
+Challenge 1 - String Methods
+=================================================
+*/
+
+/*
+Clean customer name:
+- Remove extra spaces
+- Convert to title case
+*/
+function cleanCustomerName(name) {
+
+    const trimmedName = name.trim();
+
+    const nameParts = trimmedName.split(" ");
+
+    const cleanedName = nameParts
+        .filter(word => word !== "")
+        .map(word =>
+            word.charAt(0).toUpperCase() +
+            word.slice(1).toLowerCase()
+        )
+        .join(" ");
+
+    return cleanedName;
+}
+
+/*
+Clean email:
+- Remove spaces
+- Convert to lowercase
+*/
+function cleanEmail(email) {
+    return email.trim().toLowerCase();
+}
+
+/*
+Extract first name
+*/
+function getFirstName(name) {
+
+    const cleanedName = cleanCustomerName(name);
+
+    return cleanedName.split(" ")[0];
+}
+
+/*
+Extract email domain
+*/
+function getEmailDomain(email) {
+
+    const cleanedEmail = cleanEmail(email);
+
+    if (cleanedEmail.includes("@")) {
+        return cleanedEmail.split("@")[1];
+    }
+
+    return "Invalid Domain";
+}
+
+/*
+Example of replace()
+Remove double spaces if any remain
+*/
+function removeExtraSpaces(text) {
+    return text.replace(/\s+/g, " ");
+}
+
