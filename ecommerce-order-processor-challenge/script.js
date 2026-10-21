@@ -790,11 +790,7 @@ function renderStatistics() {
 }
 
 
-/*
-=================================================
-Application Startup
-=================================================
-*/
+
 
 /*
 =================================================
@@ -1719,6 +1715,17 @@ function importOrdersFromJSON() {
 
         });
 
+
+        const emailValid =
+    isValidEmail(
+        cleanEmail(order.email)
+    );
+
+const orderIdValid =
+    isValidOrderId(
+        order.orderId
+    );
+
         /*
         Refresh entire application
         */
@@ -1811,4 +1818,157 @@ function setupJSONEvents() {
     }
 
 }
+
+
+
+/*
+=================================================
+CHALLENGE 8 - REGEXP VALIDATION
+=================================================
+*/
+
+/*
+Email Validation Regex
+*/
+const emailRegex =
+    /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+/*
+Order ID Validation Regex
+
+Valid example:
+ORD-0001
+ORD-0012
+*/
+const orderIdRegex =
+    /^ORD-\d{4}$/;
+
+/*
+Validate Email
+Uses test()
+*/
+function isValidEmail(email) {
+
+    return emailRegex.test(
+        email.trim()
+    );
+
+}
+
+/*
+Validate Order ID
+Uses test()
+*/
+function isValidOrderId(orderId) {
+
+    return orderIdRegex.test(
+        orderId.trim()
+    );
+
+}
+
+/*
+Count Valid Emails
+*/
+function countValidEmails() {
+
+    return orders.filter(order =>
+        isValidEmail(order.email)
+    ).length;
+
+}
+
+/*
+Count Invalid Emails
+*/
+function countInvalidEmails() {
+
+    return orders.filter(order =>
+        !isValidEmail(order.email)
+    ).length;
+
+}
+
+/*
+Validation Tool
+*/
+function validateInputValue() {
+
+    const input =
+        document
+            .getElementById(
+                "validationInput"
+            )
+            .value
+            .trim();
+
+    const resultContainer =
+        document.getElementById(
+            "validationResult"
+        );
+
+    if (!input) {
+
+        resultContainer.innerHTML = `
+
+            <div class="bg-yellow-100 text-yellow-700 p-3 rounded">
+
+                Please enter a value.
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    if (
+        isValidEmail(input)
+    ) {
+
+        resultContainer.innerHTML = `
+
+            <div class="bg-green-100 text-green-700 p-3 rounded">
+
+                Valid Email Address
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    if (
+        isValidOrderId(input)
+    ) {
+
+        resultContainer.innerHTML = `
+
+            <div class="bg-green-100 text-green-700 p-3 rounded">
+
+                Valid Order ID
+
+            </div>
+
+        `;
+
+        return;
+
+    }
+
+    resultContainer.innerHTML = `
+
+        <div class="bg-red-100 text-red-700 p-3 rounded">
+
+            Invalid Email or Order ID
+
+        </div>
+
+    `;
+
+}
+
 
