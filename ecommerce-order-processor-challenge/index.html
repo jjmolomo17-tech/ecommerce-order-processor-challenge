@@ -209,11 +209,80 @@
       
     
 <!-- Data Processing Section -->
+<!-- Data Processing Section -->
 <section class="bg-white shadow rounded-xl p-5">
 
     <h2 class="text-2xl font-bold mb-4">
         Data Processing
     </h2>
+
+    <!-- Export -->
+    <div class="mb-4">
+
+        <button
+            id="exportJsonBtn"
+            class="bg-blue-600 text-white px-4 py-2 rounded">
+
+            Export & Download JSON
+
+        </button>
+
+    </div>
+
+    <!-- Export Output -->
+    <div class="mb-4">
+
+        <label
+            class="block font-semibold mb-2">
+
+            JSON Export
+
+        </label>
+
+        <textarea
+            id="jsonOutput"
+            rows="10"
+            readonly
+            class="w-full border rounded p-3">
+        </textarea>
+
+    </div>
+
+    <!-- Import -->
+    <div class="mb-4">
+
+        <label
+            class="block font-semibold mb-2">
+
+            Import JSON
+
+        </label>
+
+        <textarea
+            id="jsonInput"
+            rows="10"
+            placeholder="Paste order JSON here..."
+            class="w-full border rounded p-3">
+        </textarea>
+
+    </div>
+
+    <button
+        id="importJsonBtn"
+        class="bg-green-600 text-white px-4 py-2 rounded">
+
+        Import Orders
+
+    </button>
+
+    <!-- Status Message -->
+
+    <div
+        id="jsonStatus"
+        class="mt-4">
+    </div>
+
+</section>
 
     <!-- Export JSON -->
     <div class="mb-6">

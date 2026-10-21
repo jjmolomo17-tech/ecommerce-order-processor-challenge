@@ -789,11 +789,6 @@ function renderStatistics() {
     `;
 }
 
-/*
-=================================================
-Application Startup
-=================================================
-*/
 
 /*
 =================================================
@@ -818,6 +813,8 @@ initializeChallenge4();
 renderCategories();
 
 initializeChallenge6();
+
+setupJSONEvents();
 
 
 /*
@@ -1643,3 +1640,175 @@ function initializeChallenge6() {
     setupProductLookup();
 
 }
+
+
+/*
+=================================================
+CHALLENGE 7 - JSON
+Export and Import Orders
+=================================================
+*/
+
+/*
+Export orders using JSON.stringify()
+*/
+function exportOrdersToJSON() {
+
+    const jsonString =
+        JSON.stringify(
+            orders,
+            null,
+            4
+        );
+
+    const output =
+        document.getElementById(
+            "jsonOutput"
+        );
+
+    output.value =
+        jsonString;
+
+}
+
+/*
+Import orders using JSON.parse()
+*/
+function importOrdersFromJSON() {
+
+    const jsonInput =
+        document
+            .getElementById(
+                "jsonInput"
+            )
+            .value;
+
+    const status =
+        document.getElementById(
+            "jsonStatus"
+        );
+
+    try {
+
+        const parsedOrders =
+            JSON.parse(
+                jsonInput
+            );
+
+        /*
+        Ensure imported data is an array
+        */
+        if (
+            !Array.isArray(
+                parsedOrders
+            )
+        ) {
+
+            throw new Error(
+                "Data must be an array."
+            );
+
+        }
+
+        /*
+        Add imported orders
+        */
+        parsedOrders.forEach(order => {
+
+            orders.push(order);
+
+        });
+
+        /*
+        Refresh entire application
+        */
+        sortOrdersByDate();
+
+renderOrders();
+
+renderStatistics();
+
+renderCategories();
+
+populateCategoryDropdown();
+
+buildProductMap();
+
+renderMapStatistics();
+
+renderAvailableProducts();
+
+renderArrayAnalysis();
+
+        status.innerHTML = `
+
+            <div class="bg-green-100 text-green-700 p-3 rounded">
+
+                Successfully imported
+                ${parsedOrders.length}
+                orders.
+
+            </div>
+
+        `;
+
+        document.getElementById(
+            "jsonInput"
+        ).value = "";
+
+    }
+    catch (error) {
+
+        status.innerHTML = `
+
+            <div class="bg-red-100 text-red-700 p-3 rounded">
+
+                Invalid JSON:
+                ${error.message}
+
+            </div>
+
+        `;
+
+    }
+
+}
+
+/*
+=================================================
+JSON BUTTON EVENTS
+=================================================
+*/
+
+function setupJSONEvents() {
+
+    const exportButton =
+        document.getElementById(
+            "exportJsonBtn"
+        );
+
+    const importButton =
+        document.getElementById(
+            "importJsonBtn"
+        );
+
+    if (exportButton) {
+
+        exportButton.addEventListener(
+            "click",
+            exportOrdersToJSON
+        );
+
+    }
+
+    if (importButton) {
+
+        importButton.addEventListener(
+            "click",
+            importOrdersFromJSON
+        );
+
+    }
+
+}
+
