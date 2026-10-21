@@ -795,6 +795,12 @@ Application Startup
 =================================================
 */
 
+/*
+=================================================
+Application Startup
+=================================================
+*/
+
 sortOrdersByDate();
 
 renderOrders();
@@ -802,6 +808,10 @@ renderOrders();
 renderStatistics();
 
 initializeChallenge4();
+
+initializeChallenge5();
+
+
 /*
 =================================================
 CHALLENGE 4 - ARRAY METHODS
@@ -1227,4 +1237,167 @@ function renderArrayAnalysis() {
         </div>
 
     `;
+}
+
+
+/*
+=================================================
+CHALLENGE 5 - SET
+Unique Categories
+=================================================
+*/
+
+/*
+Create a Set of unique categories
+*/
+function getUniqueCategories() {
+
+    const categorySet =
+        new Set(
+            orders.map(order =>
+                order.category
+            )
+        );
+
+    return [...categorySet];
+}
+
+/*
+Display categories on screen
+*/
+function renderCategories() {
+
+    const container =
+        document.getElementById(
+            "categoriesContainer"
+        );
+
+    if (!container) {
+        return;
+    }
+
+    container.innerHTML = "";
+
+    const categories =
+        getUniqueCategories();
+
+    categories.forEach(category => {
+
+        const categoryCard =
+            document.createElement("div");
+
+        categoryCard.className =
+            "bg-indigo-100 p-4 rounded-lg shadow text-center";
+
+        categoryCard.innerHTML = `
+        
+            <h3 class="font-bold text-lg">
+                ${category}
+            </h3>
+
+        `;
+
+        container.appendChild(
+            categoryCard
+        );
+
+    });
+
+}
+
+/*
+Populate category dropdown dynamically
+Uses Set data
+*/
+function populateCategoryDropdown() {
+
+    const dropdown =
+        document.getElementById(
+            "categoryFilter"
+        );
+
+    if (!dropdown) {
+        return;
+    }
+
+    dropdown.innerHTML = `
+        <option value="all">
+            All Categories
+        </option>
+    `;
+
+    const categories =
+        getUniqueCategories();
+
+    categories.forEach(category => {
+
+        dropdown.innerHTML += `
+        
+            <option value="${category}">
+                ${category}
+            </option>
+        
+        `;
+
+    });
+
+}
+
+/*
+Count unique categories
+Useful for Challenge 9 Statistics
+*/
+function getUniqueCategoryCount() {
+
+    return getUniqueCategories().length;
+
+}
+
+/*
+Render Set Information
+*/
+function renderSetSummary() {
+
+    const container =
+        document.getElementById(
+            "categoriesContainer"
+        );
+
+    if (!container) {
+        return;
+    }
+
+    const countCard =
+        document.createElement("div");
+
+    countCard.className =
+        "bg-green-100 p-4 rounded-lg shadow text-center";
+
+    countCard.innerHTML = `
+    
+        <h3 class="font-bold">
+            Unique Categories
+        </h3>
+
+        <p class="text-3xl mt-2">
+            ${getUniqueCategoryCount()}
+        </p>
+    
+    `;
+
+    container.prepend(countCard);
+
+}
+
+/*
+Initialize Challenge 5
+*/
+function initializeChallenge5() {
+
+    renderCategories();
+
+    populateCategoryDropdown();
+
+    renderSetSummary();
+
 }
