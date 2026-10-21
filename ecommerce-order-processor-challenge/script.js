@@ -133,6 +133,9 @@ function renderOrders() {
 
     orders.forEach(order => {
 
+        const vatAmount =
+    calculateVAT(order.price);
+
         const card = document.createElement("div");
 
         card.className =
@@ -163,10 +166,16 @@ function renderOrders() {
                 ${order.category}
             </p>
 
-            <p>
-                <strong>Price:</strong>
-                R${order.price}
-            </p>
+           <p>
+    <strong>Price:</strong>
+    R${Number(order.price).toFixed(2)}
+</p>
+
+<p>
+    <strong>VAT (15%):</strong>
+    R${vatAmount.toFixed(2)}
+</p>
+
 
             <p>
                 <strong>Order Date:</strong>
@@ -185,6 +194,7 @@ Page Load
 */
 
 renderOrders();
+renderStatistics();
 
 
 /*
@@ -342,5 +352,144 @@ function renderOrders() {
 }
 
 
+/*
+=================================================
+Challenge 2 - Number and Math Methods
+=================================================
+*/
 
+/*
+Calculate total value of all orders
+Using reduce() and parseFloat()
+*/
+function calculateTotalValue() {
+
+    return orders.reduce((total, order) => {
+
+        return total + parseFloat(order.price);
+
+    }, 0);
+}
+
+/*
+Calculate average price
+*/
+function calculateAveragePrice() {
+
+    const total = calculateTotalValue();
+
+    return total / orders.length;
+}
+
+/*
+Highest price
+Using Math.max()
+*/
+function getHighestPrice() {
+
+    const prices = orders.map(order => order.price);
+
+    return Math.max(...prices);
+}
+
+/*
+Lowest price
+Using Math.min()
+*/
+function getLowestPrice() {
+
+    const prices = orders.map(order => order.price);
+
+    return Math.min(...prices);
+}
+
+/*
+VAT Calculation (15%)
+*/
+function calculateVAT(price) {
+
+    return price * 0.15;
+}
+
+
+/*
+=================================================
+Render Statistics
+=================================================
+*/
+
+function renderStatistics() {
+
+    const statisticsContainer =
+        document.getElementById("statisticsContainer");
+
+    const totalValue =
+        calculateTotalValue();
+
+    const averagePrice =
+        calculateAveragePrice();
+
+    const highestPrice =
+        getHighestPrice();
+
+    const lowestPrice =
+        getLowestPrice();
+
+    const totalVAT =
+        calculateVAT(totalValue);
+
+    statisticsContainer.innerHTML = `
+    
+        <div class="bg-blue-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Total Value
+            </h3>
+
+            <p class="text-xl">
+                R${totalValue.toFixed(2)}
+            </p>
+        </div>
+
+        <div class="bg-green-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Average Price
+            </h3>
+
+            <p class="text-xl">
+                R${averagePrice.toFixed(2)}
+            </p>
+        </div>
+
+        <div class="bg-yellow-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Highest Price
+            </h3>
+
+            <p class="text-xl">
+                R${highestPrice.toFixed(2)}
+            </p>
+        </div>
+
+        <div class="bg-red-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                Lowest Price
+            </h3>
+
+            <p class="text-xl">
+                R${lowestPrice.toFixed(2)}
+            </p>
+        </div>
+
+        <div class="bg-purple-100 p-4 rounded-lg">
+            <h3 class="font-bold">
+                VAT (15%)
+            </h3>
+
+            <p class="text-xl">
+                R${totalVAT.toFixed(2)}
+            </p>
+        </div>
+
+    `;
+}
 
