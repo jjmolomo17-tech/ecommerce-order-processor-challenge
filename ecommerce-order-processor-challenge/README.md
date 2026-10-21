@@ -213,6 +213,32 @@ ecommerce-order-processor/
 
 ---
 
-## Author
+
+
+## Reflection Questions
+## Which built-in object did you find most useful?
+
+I found Array methods the most useful because they simplified searching, filtering, transforming and analysing data while keeping the code clean and readable.
+
+## Which challenge was the most difficult?
+
+The JSON challenge was the most difficult because it required importing external data, validating it and refreshing multiple sections of the application.
+
+## What did you learn about choosing the right JavaScript method?
+
+I learned that choosing the correct built-in method often reduces the amount of code needed and improves maintainability and readability.
+
+## What would you improve if you had more time?
+
+I would add:
+
+Local Storage
+Sorting options
+Data visualisation charts
+Advanced filtering
+Persistent user data
+Responsive admin dashboard features
+
+
 
 Joy Molomo
